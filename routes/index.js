@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var nodemailer = require('nodemailer');
+var config = require('../config');
+var transporter =nodemailer.createTransport(config.mailer);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Platform to share the code' });
@@ -35,7 +39,18 @@ router.route('/contact')
       });
     }
     else{
-      res.render('thank');
+      var mailOptions = {
+        from: 'Code U share 👥 <no-reply@code U share.com>',
+        to: req.body.email,
+        subject: 'You got a new message',
+        text: req.body.message
+      };
+      transporter.sendMail(mailOptions,function(error,info){
+        if(error){
+          return console.log(error);
+        }
+        res.render('thank');
+      });
     }
   });
 
