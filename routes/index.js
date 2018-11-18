@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'jashan' });
+  res.render('index', { title: 'Platform to share the code' });
 });
+
+router.get('/about', function(req,res,next) {
+  res.render('about', { title: 'Platform to share the code'})
+})
 
 module.exports = router;
