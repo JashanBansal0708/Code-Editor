@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+<form class="formClass" method="post" style="max-width: 400px; padding: 15px; margin: 0 auto;">
+    <!-- {{#each errorMessages}}
+      <div class="alert alert-danger">
+        {{this.msg}}
+      </div>
+    {{/each}} -->
+    <h2 class="form-signin-heading text-center">Please Sign In</h2>
+    <br/>
+
+    <input type="email" name = "email" class = "form-control" placeholder="Email" required autofocus>
+    <br/>
+    <input type="password" name = "password" class = "form-control" placeholder="password" required>
+    <br/>
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign In</button>
+    <br/>
+    <h4 class="text-center">Or</h4>
+    <br/>
+    <a href = '/auth/facebook' class="btn btn-lg btn-success btn-block">SignUp with Facebook</a>
+  </form>
