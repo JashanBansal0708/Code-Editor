@@ -8,5 +8,7 @@ module.exports = {
       user: ignore.email,
       pass: ignore.pass
     }
-  }
+  },
+  dbConnString : 'mongodb://127.0.0.1/codeEditor'
+  
 }
