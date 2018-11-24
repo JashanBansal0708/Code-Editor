@@ -1,16 +1,16 @@
 <% include ../partials/header %>
 <form class="formClass" method="post" style="max-width:400px; padding: 15px; margin: 0 auto;">
-    <!-- {{#each errorMessages}}
-      <div class="alert alert-danger">
-        {{this.msg}}
-      </div>
-    {{/each}} -->
+    <% if(error){ %>
+        <% for(var i=0; i<error.length; i++) { %>
+                <div class="alert alert-danger"><%= error[i].msg %></div>
+        <% } %>                
+    <% }%> 
     <h2 class="form-signin-heading text-center">New Account</h2>
     <br/>
   
-    <input type="text" name = "name" class = "form-control" placeholder="Name" required autofocus autocomplete="">
+    <input type="text" name = "name" class = "form-control" placeholder="Name" value="<%= name%>" required autofocus autocomplete="">
     <br/>
-    <input type="email" name = "email" class = "form-control" placeholder="Email" required autofocus>
+    <input type="email" name = "email" class = "form-control" placeholder="Email" value="<%= email%>"required autofocus>
     <br/>
     <input type="password" name = "password" class = "form-control" placeholder="password" required>
     <br/>
