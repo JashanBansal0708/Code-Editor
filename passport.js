@@ -1,6 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy ;
 var FacebookStrategy = require('passport-facebook').Strategy ; 
+var ignore = require('./ignore');
 
 passport.serializeUser(function(user,done){
   done(null, user._id);
@@ -33,9 +34,12 @@ passport.use(new LocalStrategy({
     return done(null, user);
   })
 }
-passport.use(new facebookStrategy({
-  clientID: '2047048018639795',
-  clientSecret: 'a020b4101f94daf840e02c0bd2e089f6',
+));
+
+
+passport.use(new FacebookStrategy({
+  clientID: ignore.appID,
+  clientSecret: ignore.appSecret,
   callbackURL: 'http://localhost:3000/auth/facebook/callback',
   profileFields: ['id','displayName','email']
   },
@@ -58,7 +62,7 @@ passport.use(new facebookStrategy({
           user.email = profile.emails[0].value;
           user.facbookId = profile.Id;
           user.save(function(err){
-            if(err) return done(null,false,{message:"cant save user info"});
+            if(err) return done(null,false,{message:"can't save user info"});
             return done(null,user);
           });
         })
@@ -66,4 +70,4 @@ passport.use(new facebookStrategy({
     });
   }
 ));
-));
+
