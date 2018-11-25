@@ -13,7 +13,7 @@ var userSchema = new mongoose.Schema({
   },
   hash: String,
   salt: String,
-//   facebookId: String
+  facebookId: String
 });
 
 userSchema.methods.setPassword = function(password) {

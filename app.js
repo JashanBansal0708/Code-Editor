@@ -38,7 +38,6 @@ app.use(session({
   secret: config.sessionKey,
   resave : false,
   saveUninitialized: true,
-
 }));
 
 app.use(passport.initialize());
