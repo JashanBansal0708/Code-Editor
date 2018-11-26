@@ -28,6 +28,9 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" value="<%= roomId%>" id="roomId">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/javascript/javascript.min.js"></script>
     
@@ -49,6 +52,9 @@
             username = "User "+userId;
             $("#chatbox-username").text(username);
         }
+
+        var roomId= $('#roomId').val();
+        socket.emit('joinRoom', { room: roomId});
 
         var roomId = $('#roomId').val();
         //console.log(username);
