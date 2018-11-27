@@ -39,65 +39,65 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.2/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.2/mode/javascript/javascript.min.js"></script>
 
-<script src="/plugins/ot/ot.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.9/peer.min.js"></script>
-<script>
-  var EditorClient = ot.EditorClient;
-  var SocketIOAdapter = ot.SocketIOAdapter;
-  var CodeMirrorAdapter = ot.CodeMirrorAdapter;
+    <script src="/plugins/ot/ot.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.9/peer.min.js"></script>
+    <script>
+    var EditorClient = ot.EditorClient;
+    var SocketIOAdapter = ot.SocketIOAdapter;
+    var CodeMirrorAdapter = ot.CodeMirrorAdapter;
 
-  var socket = io.connect('http://localhost:3000');
-  var editor = CodeMirror.fromTextArea(document.getElementById('code-screen'),{lineNumbers: true,theme: "monokai"  });
+    var socket = io.connect('http://localhost:3000');
+    var editor = CodeMirror.fromTextArea(document.getElementById('code-screen'),{lineNumbers: true,theme: "monokai"  });
 
-  var code = $('#code-screen').val();
+    var code = $('#code-screen').val();
 
-  var cmClient;
-  function init(str, revision, clients, serverAdapter){
-    if(!code){
-      editor.setValue(str);
-    }
-    cmClient = window.cmClient = new EditorClient(
-      revision, clients, serverAdapter, new CodeMirrorAdapter(editor)
-    );
-  };
+    var cmClient;
+    function init(str, revision, clients, serverAdapter){
+        if(!code){
+        editor.setValue(str);
+        }
+        cmClient = window.cmClient = new EditorClient(
+        revision, clients, serverAdapter, new CodeMirrorAdapter(editor)
+        );
+    };
 
-  socket.on('doc', function(obj){
-    init(obj.str, obj.revision, obj.clients, new SocketIOAdapter(socket));
-  });
+    socket.on('doc', function(obj){
+        init(obj.str, obj.revision, obj.clients, new SocketIOAdapter(socket));
+    });
 
-  var username = $("#chatbox-username").val();
-  console.log(username);
-  if(username === ""){
-    var userId = Math.floor(Math.random()*9999).toString();
-    username = "User "+userId;
-    $("#chatbox-username").text(username);
-  }
-
-  var roomId = $('#roomId').val();
-  //console.log(username);
-  socket.emit('joinRoom',{room: roomId, username: username});
-
-  var userMessage = function(name, text){
-    return('<li class="media> <div class="media-body> <div class="media">'+
-    '<div class="media-body"'+
-    '<b>'+ name + '</b>:' + text +
-    '<hr/></div></div></div></li>'
-    );
-  };
-
-  var sendMessage = function(){
-    var userMessage = $('#userMessage').val();
+    var username = $("#chatbox-username").val();
     console.log(username);
-    socket.emit('chatMessage',{message: userMessage, username: username});
-    $('#userMessage').val("");
-  };
+    if(username === ""){
+        var userId = Math.floor(Math.random()*9999).toString();
+        username = "User "+userId;
+        $("#chatbox-username").text(username);
+    }
 
-  socket.on('chatMessage', function(data){
-    console.log(data.username);
-    $('#chatbox-listMessages').append(userMessage(data.username,data.message));
-  });
+    var roomId = $('#roomId').val();
+    //console.log(username);
+    socket.emit('joinRoom',{room: roomId, username: username});
+
+    var userMessage = function(name, text){
+        return('<li class="media> <div class="media-body> <div class="media">'+
+        '<div class="media-body"'+
+        '<b>'+ name + '</b>:' + text +
+        '<hr/></div></div></div></li>'
+        );
+    };
+
+    var sendMessage = function(){
+        var userMessage = $('#userMessage').val();
+        console.log(username);
+        socket.emit('chatMessage',{message: userMessage, username: username});
+        $('#userMessage').val("");
+    };
+
+    socket.on('chatMessage', function(data){
+        console.log(data.username);
+        $('#chatbox-listMessages').append(userMessage(data.username,data.message));
+    });
 
 </script>
