@@ -40,7 +40,7 @@ router.route('/contact')
     }
     else{
       var mailOptions = {
-        from: 'Code U share 👥 <no-reply@code U share.com>',
+        from: 'Code nd Code 👥 <no-reply@code U share.com>',
         to: req.body.email,
         subject: 'You got a new message',
         text: req.body.message

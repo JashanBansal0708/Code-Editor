@@ -5,8 +5,8 @@ var socketIO = require('socket.io');
 var roomList = {}
 
 module.exports = function(server){
-  var str = 'THis is a markdown heading \n\n' +
-            'var i = i+1;';
+  var str = '// Team Editor and Chat App \n //Created by Jashan Bansal\n\n' +
+            'var jashan = 0;';
 
   var io = socketIO(server);
   io.on('connection',function(socket){

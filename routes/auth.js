@@ -10,7 +10,6 @@ router.route('/login')
    .post(passport.authenticate('local',{
         failureRedirect: '/login'
     }),function(req,res){
-        user = 
         res.redirect('/');
     });
   

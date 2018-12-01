@@ -9,6 +9,6 @@ module.exports = {
       pass: ignore.pass
     }
   },
-  dbConnString : 'mongodb://127.0.0.1:27017/code-editor',
+  dbConnString : 'mongodb://127.0.0.1:27017/codeEditor',
   sessionKey : 'HaloCodeEditorJimmy'
 }
